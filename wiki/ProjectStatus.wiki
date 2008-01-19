@@ -12,6 +12,8 @@ If you are interested in working on the code, feel free to get the latest versio
 
 == To Do == 
 
+  * Write unit tests for all the core API calls in Parrano.Tests. 
+  * Port all code in the PSlib examples library in Parrano.Examples project.
   * Compile PSlib v0.4.1 with image support for Win32. Current development is being done  using a downloaded binary of v0.4.0 without the jpeg/png/tiff/etc support. The only image type that works with this library is eps. Until I create a correct DLL, I won't be able to test the image functionality.
   * Create managed OO layer on top of core API calls, to abstract the procedural nature of the library. 
   * Make sure all extern declarations constrained with .NET enums as parameters also have original compatibility API declaration publicly available, to allow for easier porting.
