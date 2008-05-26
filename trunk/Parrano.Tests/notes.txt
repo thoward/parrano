@@ -1,0 +1,333 @@
+other examples and bug reports from php documentation
+-----------------------------------------------------
+- write unit tests to cover these examples, and check these bugs.
+
+        <?php
+$ps = ps_new();
+if (!ps_open_file($ps, "text.ps")) {
+  print "Cannot open PostScript file\n";
+  exit;
+}
+
+ps_set_info($ps, "Creator", "rectangle.php");
+ps_set_info($ps, "Author", "Uwe Steinmann");
+ps_set_info($ps, "Title", "Text placement example");
+
+ps_begin_page($ps, 596, 842);
+$psfont = ps_findfont($ps, "Helvetica", "", 0);
+ps_setfont($ps, $psfont, 8.0);
+ps_show_xy($ps, "Some text at (100, 100)", 100, 100);
+
+ps_set_value($ps, "textx", 100);
+ps_set_value($ps, "texty", 120);
+ps_show($ps, "Some text at (100, 120)");
+ps_end_page($ps);
+
+ps_delete($ps);
+?> 
+
+
+
+spot colour
+
+This example creates the spot color "PANTONE 5565 C" which is a darker green (olive) and fills a rectangle with 50% intensity. 
+
+        <?php
+$ps = ps_new();
+if (!ps_open_file($ps, "spotcolor.ps")) {
+  print "Cannot open PostScript file\n";
+  exit;
+}
+
+ps_set_info($ps, "Creator", "spotcolor.php");
+ps_set_info($ps, "Author", "Uwe Steinmann");
+ps_set_info($ps, "Title", "Spot color example");
+
+ps_begin_page($ps, 596, 842);
+ps_setcolor($ps, "fill", "cmyk", 0.37, 0.0, 0.34, 0.34);
+$spotcolor = ps_makespotcolor($ps, "PANTONE 5565 C", 0);
+ps_setcolor($ps, "fill", "spot", $spotcolor, 0.5, 0.0, 0.0);
+ps_moveto($ps, 100, 100);
+ps_lineto($ps, 100, 200);
+ps_lineto($ps, 200, 200);
+ps_lineto($ps, 200, 100);
+ps_lineto($ps, 100, 100);
+ps_fill($ps);
+ps_end_page($ps);
+
+ps_delete($ps);
+?> 
+
+
+
+
+check this for findfont function
+         
+        pepe at dexef dot hu
+13-Apr-2006 03:19 
+I found out that you must copy the <fontname>.afm files next to your php because it's searched there in default.
+zeldorblat at gmail dot com
+25-Jul-2005 07:47 
+
+        I found that my Postscript files were taking an incredibly long time to generate and the file sizes were abnormally large.  The problem was that, everytime I chose to set a font I would call ps_findfont() followed by ps_setfont().
+
+It seems that every time ps_findfont() is called, the font gets embedded in the file.  To prevent this, I keep an array of fonts I've already loaded, keyed by the font name.  When I go to set the font, I first check this array to see if I've already loaded the font, and, if so, return the resource handle from that array.  Otherwise, I call ps_findfont() and store the handle in the array.
+
+Note that, if your call to ps_findfont() occurs while inside a page, the font will not be available on other pages.  To get around this I just clear out the array at the end of each page.
+
+My PS file went from 10 M to 75 K, and the time to create the file went from around 15 seconds to less than 1 second. 
+
+
+
+
+
+line_to example
+
+        Example#1 Drawing a rectangle
+
+<?php
+$ps = ps_new();
+if (!ps_open_file($ps, "rectangle.ps")) {
+  print "Cannot open PostScript file\n";
+  exit;
+}
+
+ps_set_info($ps, "Creator", "rectangle.php");
+ps_set_info($ps, "Author", "Uwe Steinmann");
+ps_set_info($ps, "Title", "Lineto example");
+
+ps_begin_page($ps, 596, 842);
+ps_moveto($ps, 100, 100);
+ps_lineto($ps, 100, 200);
+ps_lineto($ps, 200, 200);
+ps_lineto($ps, 200, 100);
+ps_lineto($ps, 100, 100);
+ps_stroke($ps);
+ps_end_page($ps);
+
+ps_delete($ps);
+?> 
+
+
+
+_rotate example
+
+        Example#1 Rotation of the coordinate system
+
+<?php
+function rectangle($ps) {
+    ps_moveto($ps, 0, 0);
+    ps_lineto($ps, 0, 50);
+    ps_lineto($ps, 50, 50);
+    ps_lineto($ps, 50, 0);
+    ps_lineto($ps, 0, 0);
+    ps_stroke($ps);
+}
+
+$ps = ps_new();
+if (!ps_open_file($ps, "rotation.ps")) {
+  print "Cannot open PostScript file\n";
+  exit;
+}
+
+ps_set_info($ps, "Creator", "rotation.php");
+ps_set_info($ps, "Author", "Uwe Steinmann");
+ps_set_info($ps, "Title", "Rotation example");
+ps_set_info($ps, "BoundingBox", "0 0 596 842");
+
+$psfont = ps_findfont($ps, "Helvetica", "", 0);
+
+ps_begin_page($ps, 596, 842);
+ps_set_text_pos($ps, 100, 100);
+ps_save($ps);
+ps_translate($ps, 100, 100);
+ps_rotate($ps, 45);
+rectangle($ps);
+ps_restore($ps);
+ps_setfont($ps, $psfont, 8.0);
+ps_show($ps, "Text without rotation");
+ps_end_page($ps);
+
+ps_delete($ps);
+?> 
+The above example illustrates a very common way of rotating a graphic (in this case just a rectangle) 
+by simply rotating the coordinate system. Since the graphic's coordinate system assumes (0,0) to be 
+the origin, the page coordinate system is also translated to place the graphics not on the edge of 
+the page. Pay attention to the order of ps_translate() and ps_rotate(). In the above case the 
+rectangle is rotated around the point (100, 100) in the untranslated coordinate system. Switching 
+the two statements has a completely different result. 
+
+In order to output the following text at the original position, all modifications of the coordinate 
+system are encapsulated in ps_save() and ps_restore(). 
+
+
+
+
+translate example
+
+Example#1 Translation of the coordinate system
+
+<?php
+function rectangle($ps) {
+    ps_moveto($ps, 0, 0);
+    ps_lineto($ps, 0, 50);
+    ps_lineto($ps, 50, 50);
+    ps_lineto($ps, 50, 0);
+    ps_lineto($ps, 0, 0);
+    ps_stroke($ps);
+}
+
+$ps = ps_new();
+if (!ps_open_file($ps, "translate.ps")) {
+  print "Cannot open PostScript file\n";
+  exit;
+}
+
+ps_set_info($ps, "Creator", "translate.php");
+ps_set_info($ps, "Author", "Uwe Steinmann");
+ps_set_info($ps, "Title", "Translated example");
+ps_set_info($ps, "BoundingBox", "0 0 596 842");
+
+$psfont = ps_findfont($ps, "Helvetica", "", 0);
+
+ps_begin_page($ps, 596, 842);
+ps_set_text_pos($ps, 100, 100);
+ps_translate($ps, 500, 750);
+rectangle($ps);
+ps_translate($ps, -500, -750);
+ps_setfont($ps, $psfont, 8.0);
+ps_show($ps, "Text at initial position");
+ps_end_page($ps);
+
+ps_begin_page($ps, 596, 842);
+ps_set_text_pos($ps, 100, 100);
+ps_save($ps);
+ps_translate($ps, 500, 750);
+rectangle($ps);
+ps_restore($ps);
+ps_setfont($ps, $psfont, 8.0);
+ps_show($ps, "Text at initial position");
+ps_end_page($ps);
+
+ps_delete($ps);
+?> 
+The above example demonstrates two possible ways to place a graphic (in this case just a rectangle) 
+at any position on the page, while the graphic itself uses its own coordinate system. The trick is 
+to change the origin of the current coordinate system before drawing the rectangle. The translation 
+has to undone after the graphic has been drawn. 
+
+On the second page a slightly different and more elegant approach is applied. Instead of undoing 
+the translation with a second call of ps_translate() the graphics context is saved before modifying 
+the coordinate system and restored after drawing the rectangle. 
+
+
+
+
+
+ps_place_image 
+        mike at lasaero dot com
+        12-May-2007 06:11 
+        To get png images to work I had to save them as indexed colour (128 colours). 
+
+
+
+
+ps_begin_template
+
+Example#1 Creating and using a template
+
+<?php
+$ps = ps_new();
+
+if (!ps_open_file($ps, "template.ps")) {
+  print "Cannot open PostScript file\n";
+  exit;
+}
+
+ps_set_parameter($ps, "warning", "true");
+ps_set_info($ps, "Creator", "template.php");
+ps_set_info($ps, "Author", "Uwe Steinmann");
+ps_set_info($ps, "Title", "Template example");
+
+$pstemplate = ps_begin_template($ps, 30.0, 30.0);
+ps_moveto($ps, 0, 0);
+ps_lineto($ps, 30, 30);
+ps_moveto($ps, 0, 30);
+ps_lineto($ps, 30, 0);
+ps_stroke($ps);
+ps_end_template($ps);
+
+ps_begin_page($ps, 596, 842);
+ps_place_image($ps, $pstemplate, 20.0, 20.0, 1.0);
+ps_place_image($ps, $pstemplate, 50.0, 30.0, 0.5);
+ps_place_image($ps, $pstemplate, 70.0, 70.0, 0.6);
+ps_place_image($ps, $pstemplate, 30.0, 50.0, 1.3);
+ps_end_page($ps);
+
+ps_close($ps);
+ps_delete($ps);
+?> 
+
+
+
+
+ps_begin_pattern
+
+        Example#1 Creating and using a pattern
+
+<?php
+$ps = ps_new();
+
+if (!ps_open_file($ps, "pattern.ps")) {
+  print "Cannot open PostScript file\n";
+  exit;
+}
+
+ps_set_parameter($ps, "warning", "true");
+ps_set_info($ps, "Creator", "pattern.php");
+ps_set_info($ps, "Author", "Uwe Steinmann");
+ps_set_info($ps, "Title", "Pattern example");
+
+
+$pspattern = ps_begin_pattern($ps, 10.0, 10.0, 10.0, 10.0, 1);
+ps_setlinewidth($ps, 0.2);
+ps_setcolor($ps, "stroke", "rgb", 0.0, 0.0, 1.0, 0.0);
+ps_moveto($ps, 0, 0);
+ps_lineto($ps, 7, 7);
+ps_stroke($ps);
+ps_moveto($ps, 0, 7);
+ps_lineto($ps, 7, 0);
+ps_stroke($ps);
+ps_end_pattern($ps);
+
+ps_begin_page($ps, 596, 842);
+ps_setcolor($ps, "both", "pattern", $pspattern, 0.0, 0.0, 0.0);
+ps_rect($ps, 50, 400, 200, 200);
+ps_fill($ps);
+ps_end_page($ps);
+
+ps_close($ps);
+ps_delete($ps);
+?> 
+
+
+
+ps_hyphenate
+
+        Example#1 Hyphennate a text
+
+<?php
+$word = "Koordinatensystem";
+$psdoc = ps_new();
+ps_set_parameter($psdoc, "hyphendict", "hyph_de.dic");
+$hyphens = ps_hyphenate($psdoc, $word);
+for($i=0; $i<strlen($word); $i++) {
+  echo $word[$i];
+  if(in_array($i, $hyphens))
+    echo "-";
+}
+ps_delete($psdoc);
+?> 
+The above example will output:
+
+Ko-ordi-na-ten-sys-tem
