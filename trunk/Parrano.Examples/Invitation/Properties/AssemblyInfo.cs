@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Invitation")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Creates PostScript invitations for a list of people.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Invitation (Parrano Example)")]

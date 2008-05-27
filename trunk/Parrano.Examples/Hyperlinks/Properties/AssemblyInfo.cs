@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Hyperlinks")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Demonstrates the user of various kinds of links within a PostScript or PDF document.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Hyperlinks (Parrano Example)")]
