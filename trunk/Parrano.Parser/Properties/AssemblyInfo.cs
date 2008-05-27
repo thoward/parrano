@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Parrano.Parser")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Simple Postscript Parser")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Powells Books")]
+[assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Parrano.Parser")]
-[assembly: AssemblyCopyright("Copyright © Powells Books 2008")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

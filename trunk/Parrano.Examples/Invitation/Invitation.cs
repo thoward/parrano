@@ -22,8 +22,8 @@ namespace Invitation
             PSLib.PS_open_file(psdoc, "invitation.ps");
             Console.WriteLine("Creating inivitation.ps ... ");
 
-            PSLib.PS_set_info(psdoc, "Creator", "Python");
-            PSLib.PS_set_info(psdoc, "Author", "Stefan Schroeder");
+            PSLib.PS_set_info(psdoc, "Creator", "Parrano");
+            PSLib.PS_set_info(psdoc, "Author", "Stefan Schroeder & Troy Howard");
             PSLib.PS_set_info(psdoc, "Title", "Serial letter example");
             PSLib.PS_set_info(psdoc, "Keywords", "Invitation, letter");
             PSLib.PS_set_info(psdoc, "BoundingBox", "0 0 596 842");

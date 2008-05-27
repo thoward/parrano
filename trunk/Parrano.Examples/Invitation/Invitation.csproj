@@ -7,7 +7,7 @@
     <ProjectGuid>{02D2BF90-7AA2-45AA-9AAF-86EA58FE55CD}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Invitation</RootNamespace>
+    <RootNamespace>Parrano.Examples.Invitation</RootNamespace>
     <AssemblyName>Invitation</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
