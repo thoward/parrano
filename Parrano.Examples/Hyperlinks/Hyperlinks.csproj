@@ -7,7 +7,7 @@
     <ProjectGuid>{D48ED212-A58C-4EDE-9D72-F88B36361E4D}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Parrano.Examples.PSClockHyperlinks</RootNamespace>
+    <RootNamespace>Parrano.Examples.Hyperlinks</RootNamespace>
     <AssemblyName>Hyperlinks</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">

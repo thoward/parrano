@@ -1,7 +1,7 @@
 using System;
 using Parrano.Api;
 
-namespace Hyperlinks
+namespace Parrano.Examples.Hyperlinks
 {
     class Hyperlinks
     {

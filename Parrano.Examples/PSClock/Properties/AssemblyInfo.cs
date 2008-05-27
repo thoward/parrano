@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PSClock")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Generates 100 pages of images of a clock with the current time in a PostScript file.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("PSClock (Parrano Example)")]

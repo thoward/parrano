@@ -1,22 +1,20 @@
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Parrano.Api;
 
-namespace Invitation
+namespace Parrano.Examples.Invitation
 {
     class Invitation
     {
-        static void Main(string[] args)
+        static void Main()
         {
             // This example demostrates how to make a serial letter.
 
 
-            int boxwidth = 200;
-            int boxheight = 630;
-            int baseline = 100;
-            int colsep = 20;
-            int leftmargin = 100;
+            const int boxwidth = 200;
+            const int boxheight = 630;
+            const int baseline = 100;
+            const int colsep = 20;
+            const int leftmargin = 100;
 
             IntPtr psdoc = PSLib.PS_new();
             PSLib.PS_open_file(psdoc, "invitation.ps");
