@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Hyperlinks")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Powells Books")]
-[assembly: AssemblyProduct("Hyperlinks")]
-[assembly: AssemblyCopyright("Copyright © Powells Books 2008")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("Hyperlinks (Parrano Example)")]
+[assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

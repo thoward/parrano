@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hyperlinks", "Parrano.Examples\Hyperlinks\Hyperlinks.csproj", "{D48ED212-A58C-4EDE-9D72-F88B36361E4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parrano", "Parrano.Api\Parrano.Api.csproj", "{A3CA59F5-8418-40E5-B776-A37AF097107F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parrano.Api", "Parrano.Api\Parrano.Api.csproj", "{A3CA59F5-8418-40E5-B776-A37AF097107F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invitation", "Parrano.Examples\Invitation\Invitation.csproj", "{02D2BF90-7AA2-45AA-9AAF-86EA58FE55CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSClock", "Parrano.Examples\PSClock\PSClock.csproj", "{F91A9DC0-2675-45CA-8BA5-AB4597775BE6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +27,10 @@ Global
 		{02D2BF90-7AA2-45AA-9AAF-86EA58FE55CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02D2BF90-7AA2-45AA-9AAF-86EA58FE55CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02D2BF90-7AA2-45AA-9AAF-86EA58FE55CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F91A9DC0-2675-45CA-8BA5-AB4597775BE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F91A9DC0-2675-45CA-8BA5-AB4597775BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F91A9DC0-2675-45CA-8BA5-AB4597775BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F91A9DC0-2675-45CA-8BA5-AB4597775BE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
