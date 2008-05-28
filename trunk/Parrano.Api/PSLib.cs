@@ -808,6 +808,8 @@ namespace Parrano.Api
         [DllImport("pslib.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
         public static extern void PS_continue_text2(IntPtr psdoc, [MarshalAs(UnmanagedType.LPStr)] string text, int len);
 
+        #region ps_setcolor and overloads
+
         /// <summary>
         /// Sets the color for drawing, filling, or both. 
         /// <para>Known Bug: The second parameter is currently not always evaluated. The color is sometimes set for filling and drawing just as if fillstroke were passed. </para>
@@ -829,18 +831,67 @@ namespace Parrano.Api
         /// <para>Known Bug: The second parameter is currently not always evaluated. The color is sometimes set for filling and drawing just as if fillstroke were passed. </para>
         /// </summary>
         /// <param name="psdoc">A resource identifier to a postcript document.</param>
-        /// <param name="scopeType">The parameter scopeType can be both, fill, or fillstroke. </param>
+        /// <param name="usage">The parameter scopeType can be both, fill, or fillstroke. </param>
         /// <param name="colorspace">The colorspace should be one of gray, rgb, cmyk, spot, pattern. Depending on the colorspace either only the first, the first three or all parameters will be used. </param>
         /// <param name="c1">Depending on the colorspace this is either the red component (rgb), the cyan component (cmyk), the gray value (gray), the identifier of the spot color or the identifier of the pattern. </param>
         /// <param name="c2">Depending on the colorspace this is either the green component (rgb), the magenta component (cmyk). </param>
         /// <param name="c3">Depending on the colorspace this is either the blue component (rgb), the yellow component (cmyk). </param>
         /// <param name="c4">This must only be set in cmyk colorspace and specifies the black component. </param>
-        public static void PS_setcolor(IntPtr psdoc, SetColorScopeType scopeType, ColorSpace colorspace, float c1, float c2, float c3,
+        public static void PS_setcolor(IntPtr psdoc, ColorUsage usage, ColorSpace colorspace, float c1, float c2, float c3,
                                        float c4)
         {
-            PS_setcolor(psdoc, scopeType.ToString(), colorspace.ToString(), c1, c2, c3, c4);
+            PS_setcolor(psdoc, usage.ToString(), colorspace.ToString(), c1, c2, c3, c4);
         }
 
+        public static void PS_setcolor(IntPtr psdoc, ColorUsage usage, SpotColor spot)
+        {
+            PS_setcolor(psdoc, usage, ColorSpace.spot, spot.ResourceID, 0, 0, 0);
+        }
+
+        public static void PS_setcolor(IntPtr psdoc, ColorUsage usage, Pattern pattern)
+        {
+            PS_setcolor(psdoc, usage, ColorSpace.pattern, pattern.ResourceID, 0, 0, 0);
+        }
+
+        public static void PS_setcolor(IntPtr psdoc, ColorUsage usage, Color color)
+        {
+            CMYKColor cmyk = color as CMYKColor;
+            if (cmyk != null)
+            {
+                PS_setcolor(psdoc, usage, cmyk);
+                return;
+            }
+
+            RGBColor rgb = color as RGBColor;
+            if (rgb != null)
+            {
+                PS_setcolor(psdoc, usage, rgb);
+                return;
+            }
+
+            GrayColor gray = color as GrayColor;
+            if (gray != null)
+            {
+                PS_setcolor(psdoc, usage, gray);
+            }
+        }
+
+        public static void PS_setcolor(IntPtr psdoc, ColorUsage usage, CMYKColor cmyk)
+        {
+            PS_setcolor(psdoc, usage, ColorSpace.cmyk, cmyk.Cyan, cmyk.Magenta, cmyk.Yellow, cmyk.Black);
+        }
+
+        public static void PS_setcolor(IntPtr psdoc, ColorUsage usage, RGBColor rgb)
+        {
+            PS_setcolor(psdoc, usage, ColorSpace.rgb, rgb.Red, rgb.Green, rgb.Blue, 0);
+        }
+
+        public static void PS_setcolor(IntPtr psdoc, ColorUsage usage, GrayColor gray)
+        {
+            PS_setcolor(psdoc, usage, ColorSpace.rgb, gray.Intensity, 0, 0, 0);
+        }
+
+        #endregion 
 
         /// <summary>
         /// Creates a spot color from the current fill color. 
@@ -858,6 +909,11 @@ namespace Parrano.Api
         public static extern int PS_makespotcolor(IntPtr psdoc, [MarshalAs(UnmanagedType.LPStr)] string name,
                                                   int reserved);
 
+        public static void PS_makespotcolor(IntPtr psdoc, SpotColor color)
+        {
+            color.ResourceID = PS_makespotcolor(psdoc, color.Name, 0);
+        }
+
         /// <summary>
         /// <para>Loads a font for later use. Before text is output with a loaded font it must be set with ps_setfont(). This function needs the adobe font metric file in order to calculate the space used up by the characters. A font which is loaded within a page will only be available on that page. Fonts which are to be used in the complete document have to be loaded before the first call of ps_begin_page(). Calling ps_findfont() between pages will make that font available for all following pages. </para>
         /// <para>The name of the afm file must be fontname .afm. If the font shall be embedded the file fontname .pfb containing the font outline must be present as well. </para>
@@ -871,6 +927,11 @@ namespace Parrano.Api
         [DllImport("pslib.dll", CallingConvention = CallingConvention.Cdecl, CharSet = CharSet.Auto)]
         public static extern int PS_findfont(IntPtr psdoc, [MarshalAs(UnmanagedType.LPStr)] string fontname,
                                              [MarshalAs(UnmanagedType.LPStr)] string encoding, bool embed);
+
+        public static int PS_findfont(IntPtr psdoc, string fontname)
+        {
+            return PS_findfont(psdoc, fontname, null, false);
+        }
 
         // start back here for commenting... 
 
@@ -941,7 +1002,7 @@ namespace Parrano.Api
         {
             StringGeometry stringGeometry = PS_string_geometry(psdoc, text, xlen, fontid, size);
 
-            dimension = new float[] {stringGeometry.width, stringGeometry.ascender, stringGeometry.descender};
+            dimension = stringGeometry.ToFloatArray();
 
             return stringGeometry.width;
         }

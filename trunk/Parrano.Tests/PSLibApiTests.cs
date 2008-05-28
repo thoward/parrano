@@ -987,13 +987,13 @@ namespace Parrano.Tests
         public void PS_setcolorPsdocTypeColorspaceC1C2C3C4_Test()
         {
             IntPtr psdoc = IntPtr.Zero;
-            SetColorScopeType scopeType = default(SetColorScopeType);
+            ColorUsage usage = default(ColorUsage);
             ColorSpace colorspace = default(ColorSpace);
             float c1 = -1;
             float c2 = -1;
             float c3 = -1;
             float c4 = -1;
-            PSLib.PS_setcolor(psdoc, scopeType, colorspace, c1, c2, c3, c4);
+            PSLib.PS_setcolor(psdoc, usage, colorspace, c1, c2, c3, c4);
             //Assert.Fail("Create or modify test(s).");
 
         }

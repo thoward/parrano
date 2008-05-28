@@ -4,11 +4,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D48ED212-A58C-4EDE-9D72-F88B36361E4D}</ProjectGuid>
+    <ProjectGuid>{09653159-EF7B-4314-B7BD-48802FE9AFA3}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Parrano.Examples.Hyperlinks</RootNamespace>
-    <AssemblyName>Hyperlinks</AssemblyName>
+    <RootNamespace>Parrano.Examples.SpotColorExample</RootNamespace>
+    <AssemblyName>SpotColor</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -33,13 +33,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hyperlinks.cs" />
+    <Compile Include="SpotColorExample.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Parrano.Api\Parrano.Api.csproj">
       <Project>{A3CA59F5-8418-40E5-B776-A37AF097107F}</Project>
-      <Name>Parrano</Name>
+      <Name>Parrano.Api</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

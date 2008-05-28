@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Invitation", "Parrano.Examp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSClock", "Parrano.Examples\PSClock\PSClock.csproj", "{F91A9DC0-2675-45CA-8BA5-AB4597775BE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpotColor", "Parrano.Examples\SpotColor\SpotColor.csproj", "{09653159-EF7B-4314-B7BD-48802FE9AFA3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calender", "Parrano.Examples\Calender\Calender.csproj", "{D08DAB6A-A9B2-4EF6-9720-2A55D23EE73B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{F91A9DC0-2675-45CA-8BA5-AB4597775BE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F91A9DC0-2675-45CA-8BA5-AB4597775BE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F91A9DC0-2675-45CA-8BA5-AB4597775BE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09653159-EF7B-4314-B7BD-48802FE9AFA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09653159-EF7B-4314-B7BD-48802FE9AFA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09653159-EF7B-4314-B7BD-48802FE9AFA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09653159-EF7B-4314-B7BD-48802FE9AFA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D08DAB6A-A9B2-4EF6-9720-2A55D23EE73B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D08DAB6A-A9B2-4EF6-9720-2A55D23EE73B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D08DAB6A-A9B2-4EF6-9720-2A55D23EE73B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D08DAB6A-A9B2-4EF6-9720-2A55D23EE73B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

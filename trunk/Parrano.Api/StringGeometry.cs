@@ -27,5 +27,10 @@ namespace Parrano.Api
         /// The descender of the string. 
         /// </summary>
         public float descender;
+
+        public float[] ToFloatArray()
+        {
+            return new float[] { width, ascender, descender };
+        }
     }
 }
