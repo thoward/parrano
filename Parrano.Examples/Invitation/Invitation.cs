@@ -26,7 +26,7 @@ namespace Parrano.Examples.Invitation
             PSLib.PS_set_info(psdoc, "Keywords", "Invitation, letter");
             PSLib.PS_set_info(psdoc, "BoundingBox", "0 0 596 842");
 
-            int antiqua = PSLib.PS_findfont(psdoc, "Helvetica", null, false);
+            int antiqua = PSLib.PS_findfont(psdoc, "Helvetica");
 
             string[] names = { "Alice", "Bob", "Charles" };
 

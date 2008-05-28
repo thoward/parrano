@@ -7,16 +7,16 @@ using Parrano.Api;
 namespace Parrano.Tests
 {
 
-    [TestFixture()]
+    [TestFixture]
     public class PSLibExtensionsTests
     {
-        [SetUp()]
+        [SetUp]
         public void SetUp()
         {
             tempFilename = Path.GetTempFileName();
         }
 
-        [TearDown()]
+        [TearDown]
         public void TearDown()
         {
             if (File.Exists(tempFilename))
@@ -31,7 +31,7 @@ namespace Parrano.Tests
 
         private string tempFilename;
 
-        [Test()]
+        [Test]
         public void TestOpenPSDocHandleFilename()
         {
             string filename = tempFilename;
@@ -61,7 +61,7 @@ namespace Parrano.Tests
                     "File was created, but the contents are wrong.");
         }
 
-        [Test()]
+        [Test]
         public void TestOpenPSDocHandleFilenamePageSize()
         {
             string filename = tempFilename;
@@ -89,7 +89,7 @@ namespace Parrano.Tests
 
         }
 
-        [Test()]
+        [Test]
         public void TestOpenPSDocHandleFilenamePageWidthPageHeight()
         {
             string filename = tempFilename;
@@ -116,7 +116,7 @@ namespace Parrano.Tests
             return "pslib " + PSLib.PS_get_majorversion() + "." + PSLib.PS_get_minorversion() + "." + PSLib.PS_get_subminorversion();
         }
 
-        [Test()]
+        [Test]
         public void TestOpenPSDocHandleFilenamePageWidthPageHeightInfoValues()
         {
             string filename = tempFilename;
@@ -186,7 +186,7 @@ namespace Parrano.Tests
                     "File contents look wrong.");
         }           
 
-        [Test()]
+        [Test]
         public void TestDrawLine()
         {
             Random r = new Random();
@@ -242,7 +242,7 @@ namespace Parrano.Tests
 
         }
 
-        [Test()]
+        [Test]
         public void TestClosePSDocHandle()
         {
             IntPtr psdoc = IntPtr.Zero;

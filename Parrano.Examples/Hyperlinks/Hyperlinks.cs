@@ -17,7 +17,7 @@ namespace Parrano.Examples.Hyperlinks
             PSLib.PS_begin_page(psdoc, 596, 842);
 
             PSLib.PS_add_bookmark(psdoc, "First Page", 0, false);
-            int psfont = PSLib.PS_findfont(psdoc, "Helvetica", null, false);
+            int psfont = PSLib.PS_findfont(psdoc, "Helvetica");
             PSLib.PS_setfont(psdoc, psfont, fontsize);
             PSLib.PS_set_value(psdoc, "leading", 14);
 
